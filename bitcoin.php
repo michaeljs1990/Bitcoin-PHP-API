@@ -16,10 +16,6 @@ class Bitcoin{
     
     public function __construct(){
         parent::__construct();
-        
-        //Load in jsonrpcclient.
-        include 'jsonrpcclient.php';
-        
         //Create connection once to reduce calls to server.
         $this->bitcoin = new jsonRPCClient("http://{$this->user}:{$this->password}@{$this->ip}/");
     }
