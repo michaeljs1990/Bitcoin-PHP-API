@@ -9,15 +9,12 @@
 class Bitcoin{
     
     //Set variables as found in bitcoin.conf
-    private $user = 'bitcoinrpc'; // rpcuser
-    private $password = '3vJnqZhgwxWMEWw2CNr4g2YCQvZxgDYvcHMWzwrLFRrN'; // rpcpassword
-    private $ip = '127.0.0.1:8332'; // ip:port
     private $bitcoin;
     
-    public function __construct(){
+    public function __construct(jsonRPCClient $rpc){
         parent::__construct();
         //Create connection once to reduce calls to server.
-        $this->bitcoin = new jsonRPCClient("http://{$this->user}:{$this->password}@{$this->ip}/");
+        $this->bitcoin = $rpc;
     }
     
     /**
