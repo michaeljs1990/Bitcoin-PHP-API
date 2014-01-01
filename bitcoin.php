@@ -6,6 +6,9 @@
  * Author: Michael Schuett
  * Date: 12/29/2013
  */
+
+namespace Bitcoin;
+
 class Bitcoin{
     
     //Set variables as found in bitcoin.conf
