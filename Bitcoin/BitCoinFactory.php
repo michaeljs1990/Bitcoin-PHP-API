@@ -2,7 +2,7 @@
 
 namepace Bitcoin;
 
-class BitCoinFactory
+class BitcoinFactory
 {
 	public static function create($user, $password, $ip)
 	{
