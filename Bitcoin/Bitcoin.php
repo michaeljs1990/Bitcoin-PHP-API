@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  All methods of this class are derived from the bitcoin API
  * https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list
@@ -6,64 +7,67 @@
  * Author: Michael Schuett
  * Date: 12/29/2013
  */
-class Bitcoin{
-    
+
+namespace Bitcoin;
+
+class Bitcoin
+{
+
     //Set variables as found in bitcoin.conf
-    private $user = 'bitcoinrpc'; // rpcuser
-    private $password = '3vJnqZhgwxWMEWw2CNr4g2YCQvZxgDYvcHMWzwrLFRrN'; // rpcpassword
-    private $ip = '127.0.0.1:8332'; // ip:port
     private $bitcoin;
-    
-    public function __construct(){
+
+    public function __construct(JsonRPCClient $rpc)
+    {
         parent::__construct();
-        
-        //Load in jsonrpcclient.
-        include 'jsonrpcclient.php';
-        
         //Create connection once to reduce calls to server.
-        $this->bitcoin = new jsonRPCClient("http://{$this->user}:{$this->password}@{$this->ip}/");
+        $this->bitcoin = $rpc;
     }
-    
+
     /**
      *  function getinfo()
      * Returns an object containing various state info.
      */
-    public function getinfo() {   
+    public function getinfo()
+    {
         return $this->bitcoin->getinfo();
     }
-    
+
     /**
      *  function gethashespersec
      * Returns a recent hashes per second performance measurement while generating.
      */
-    public function gethashespersec() {
+    public function gethashespersec()
+    {
         return $this->bitcoin->gethashespersec();
     }
-    
+
     /**
      *  function getgenerate
      * Returns true or false whether bitcoind is currently generating hashes.
      */
-    public function getgenerate() {
+    public function getgenerate()
+    {
         return $this->bitcoin->getgenerate();
     }
-    
+
     /**
      *  function getdifficulty
      * Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
      */
-    public function getdifficulty() {
+    public function getdifficulty()
+    {
         return $this->bitcoin->getdifficulty();
     }
-    
+
     /**
      *  function getconnectioncount
      * Returns the number of connections to other nodes.
      */
-    public function getconnectioncount() {
+    public function getconnectioncount()
+    {
         return $this->bitcoin->getconnectioncount();
     }
-    
+
     /**
      *  function getblocktemplate
      * Returns data needed to construct a block to work on. See BIP_0022 for more info on params.
@@ -75,10 +79,11 @@ class Bitcoin{
      *  See the following link for more info and all valid pairs.
      *  https://github.com/bitcoin/bips/blob/master/bip-0022.mediawiki#Reference_Implementation
      */
-    public function getblocktemplate($params = null) {
+    public function getblocktemplate($params = null)
+    {
         return isset($params) ? $this->bitcoin->getblocktemplate($params) : $this->bitcoin->getblocktemplate();
     }
-    
+
     /**
      *  function getnewaddress
      * Returns a new bitcoin address for receiving payments. If [account] is specified 
@@ -90,10 +95,11 @@ class Bitcoin{
      * create a group of accounts seperate from the rest create them all using
      * the same string. Read the link above for limitations.
      */
-    public function getnewaddress($account = '') {
+    public function getnewaddress($account = '')
+    {
         return $this->bitcoin->getnewaddress($account);
     }
-    
+
     /**
      *  function getaccount
      * Returns the account associated with the given address.
@@ -101,10 +107,11 @@ class Bitcoin{
      * Valid Params:
      *  $address = (String) Valid bitcoin address.
      */
-    public function getaccount($address) {
+    public function getaccount($address)
+    {
         return $this->bitcoin->getaccount($address);
     }
-    
+
     /**
      *  function getblockhash
      * Returns hash of block in best-block-chain at <index>; index 0 is the genesis block
@@ -112,18 +119,20 @@ class Bitcoin{
      * Valid Params:
      *  $num = (int) must be less than current chain length.
      */
-    public function getblockhash($num = 0){
+    public function getblockhash($num = 0)
+    {
         return $this->bitcoin->getblockhash($num);
     }
-    
+
     /**
      *  function getblockcount
      * Returns the number of blocks in the longest block chain.
      */
-    public function getblockcount(){
+    public function getblockcount()
+    {
         return $this->bitcoin->getblockcount();
     }
-    
+
     /**
      *  function getblock
      * Returns information about the block with the given hash.
@@ -131,18 +140,20 @@ class Bitcoin{
      * Valid Params:
      *  $hash = (String) Valid block hash.
      */
-    public function getblock($hash){
+    public function getblock($hash)
+    {
         return $this->bitcoin->getblock($hash);
     }
-    
+
     /**
      *  function getbestblockhash
      * Recent git checkouts only Returns the hash of the best (tip) block in the longest block chain.
      */
-    public function getbestblockhash(){
+    public function getbestblockhash()
+    {
         return $this->bitcoin->getbestblockhash();
     }
-    
+
     /**
      *  function getbalance
      * If [account] is not specified, returns the server's total available balance.
@@ -152,18 +163,20 @@ class Bitcoin{
      *  $account = (String) Valid account name.
      *  $confs = (int) number of confs required.
      */
-    public function getbalance($account = '', $confs = 0){
+    public function getbalance($account = '', $confs = 0)
+    {
         return $this->bitcoin->getbalance($account, $confs);
     }
-    
+
     /**
      *  function getaddressesbyaccount
      * Returns the list of addresses for the given account.
      */
-    public function getaddressesbyaccount($account = ''){
+    public function getaddressesbyaccount($account = '')
+    {
         return $this->bitcoin->getaddressesbyaccount($account);
     }
-    
+
     /**
      *  function getaddednodeinfo
      * version 0.8 Returns information about the given added node, or all added nodes
@@ -177,10 +190,11 @@ class Bitcoin{
      * Example:
      *  getaddednodeinfo(true, 'bitcoin.es');
      */
-    public function getaddednodeinfo($bool = false, $params = ''){
+    public function getaddednodeinfo($bool = false, $params = '')
+    {
         return $this->bitcoin->getaddednodeinfo($bool, $params);
     }
-    
+
     /**
      *  function addnode
      * version 0.8 Attempts add or remove <node> from the addnode list or try a connection to <node> once.
@@ -189,10 +203,11 @@ class Bitcoin{
      *  $node = (String) ip or url.
      *  $opts = (String) accepts add, remove, or onetry.
      */
-    public function addnode($node, $opts = 'add'){
+    public function addnode($node, $opts = 'add')
+    {
         return $this->bitcoin->addnode($node, $opts);
     }
-    
+
     /**
      *  function getaccountaddress
      * Returns the current bitcoin address for receiving payments to this account.
@@ -200,10 +215,11 @@ class Bitcoin{
      * Valid Params:
      *  $account = (String) Account name.
      */
-    public function getaccountaddress($account = ''){
+    public function getaccountaddress($account = '')
+    {
         return $this->bitcoin->getaccountaddress($account);
     }
-    
+
     /**
      *  function encryptwallet
      * Encrypts the wallet with <passphrase>.
@@ -211,10 +227,11 @@ class Bitcoin{
      * Valid Params:
      *  $passphrase = (String) valid password or sentence.
      */
-    public function encryptwallet($passphrase){
+    public function encryptwallet($passphrase)
+    {
         return $this->bitcoin->encryptwallet($passphrase);
     }
-    
+
     /**
      * function dumpprivkey
      * Reveals the private key corresponding to <bitcoinaddress>.
@@ -222,10 +239,11 @@ class Bitcoin{
      * Valid Paramas:
      *  $address = (String) valid bitcoin address.
      */
-    public function dumpprivkey($address){
+    public function dumpprivkey($address)
+    {
         return $this->bitcoin->dumpprivkey($address);
     }
-    
+
     /**
      * function decoderawtransaction
      * version 0.7 Produces a human-readable JSON object for a raw transaction.
@@ -235,10 +253,11 @@ class Bitcoin{
      * 
      * See https://bitcointalk.org/index.php?topic=218447.msg2303731#msg2303731
      */
-    public function decoderawtransaction($hex){
+    public function decoderawtransaction($hex)
+    {
         return $this->bitcoin->decoderawtransaction($hex);
     }
-    
+
     /**
      * function createrawtransaction
      * version 0.7 Creates a raw transaction spending given inputs.
@@ -251,10 +270,11 @@ class Bitcoin{
      * 
      * TODO: Improve documentation
      */
-    public function createrawtransaction($transactions, $amount){
+    public function createrawtransaction($transactions, $amount)
+    {
         return $this->bitcoin->createrawtransaction($transactions, $amount);
     }
-    
+
     /**
      * function createmultisig
      * Creates a multi-signature address and returns a json object.
@@ -265,10 +285,11 @@ class Bitcoin{
      *  
      * See https://bitcointalk.org/index.php?topic=270204.0
      */
-    public function createmultisig($num, $keys){
+    public function createmultisig($num, $keys)
+    {
         return $this->bitcoin->createmultisig($num, $keys);
     }
-    
+
     /**
      * function backupwallet
      * Safely copies wallet.dat to destination, which can be a directory or a path with filename.
@@ -276,10 +297,11 @@ class Bitcoin{
      * Valid Params:
      *  $path = (String) directory or file to back up to.
      */
-    public function backupwallet($path){
+    public function backupwallet($path)
+    {
         return $this->bitcoin->backupwallet($path);
     }
-    
+
     /**
      * function addmultisigaddress
      * Add a nrequired-to-sign multisignature address to the wallet. Each key is
@@ -291,28 +313,31 @@ class Bitcoin{
      *  $keys = (array) valid bitcoin keys.
      *  $account = (String) (opt) assign to account.
      */
-    public function addmultisigaddress($num, $keys, $account = null){
+    public function addmultisigaddress($num, $keys, $account = null)
+    {
         return isset($account) ? $this->bitcoin->addmultisigaddress($num, $keys, $account) : $this->bitcoin->addmultisigaddress($num, $keys);
     }
-    
+
     /**
      * function getmininginfo
      * Returns an object containing mining-related information: blocks,
      * currentblocksize, currentblocktx, difficulty, errors, generate,
      * genproclimit, hashespersec, pooledtx, testnet
      */
-    public function getmininginfo(){
+    public function getmininginfo()
+    {
         return $this->bitcoin->getmininginfo();
     }
-    
+
     /**
      * function getpeerinfo
      * version 0.7 Returns data about each connected node.
      */
-    public function getpeerinfo(){
+    public function getpeerinfo()
+    {
         return $this->bitcoin->getpeerinfo();
     }
-    
+
     /**
      * function getrawchangeaddress
      * recent git checkouts only Returns a new Bitcoin address, for receiving
@@ -321,18 +346,20 @@ class Bitcoin{
      * Valid Params:
      *  $account = (String) (otp) account that change address is set for. 
      */
-    public function getrawchangeaddress($account = null){
+    public function getrawchangeaddress($account = null)
+    {
         return isset($account) ? $this->bitcoin->getrawchangeaddress($account) : $this->bitcoin->getrawchangeaddress();
     }
-    
+
     /**
      * function getrawmempool
      * version 0.7 Returns all transaction ids in memory pool
      */
-    public function getrawmempool(){
+    public function getrawmempool()
+    {
         return $this->bitcoin->getrawmempool();
     }
-    
+
     /**
      * function getrawtransaction
      * version 0.7 Returns raw transaction representation for given transaction id.
@@ -341,10 +368,11 @@ class Bitcoin{
      *  $transaction = (String) transactionid.
      *  $verbos = (int) level of reporting.
      */
-    public function getrawtransaction($transaction, $verbos = 0){
+    public function getrawtransaction($transaction, $verbos = 0)
+    {
         return $this->bitcoin->getrawtransaction($transaction, $verbos);
     }
-    
+
     /**
      * function getreceivedbyaccount
      * Returns the total amount received by addresses with [account] in transactions 
@@ -355,10 +383,11 @@ class Bitcoin{
      *  $account = (String) Account name.
      *  $confs = (int) number of confimations.
      */
-    public function getreceivedbyaccount($account = null, $confs = 0){
+    public function getreceivedbyaccount($account = null, $confs = 0)
+    {
         return isset($account) ? $this->bitcoin->getreceivedbyaccount($account, $confs) : $this->bitcoin->getreceivedbyaccount();
     }
-    
+
     /**
      * function getreceivedbyaddress
      * Returns the amount received by <bitcoinaddress> in transactions with at least 
@@ -371,10 +400,11 @@ class Bitcoin{
      *  $address = (String) valid bitcoin address.
      *  $confs = (int) number of confimations.
      */
-    public function getreceivedbyaddress($address, $confs = '1'){
+    public function getreceivedbyaddress($address, $confs = '1')
+    {
         return $this->bitcoin->getreceivedbyaddress($address, $confs);
     }
-    
+
     /**
      * function gettransaction
      * Returns an object about the given transaction containing:
@@ -391,10 +421,11 @@ class Bitcoin{
      * To get transactions outside of your wallet you will need to follow this.
      * http://bitcoin.stackexchange.com/questions/11759/get-non-wallet-transactions-using-bitcoin-rpc-gettransaction
      */
-    public function gettransaction($transaction){
+    public function gettransaction($transaction)
+    {
         return $this->bitcoin->gettransaction($transaction);
     }
-    
+
     /**
      * function gettxout
      * Returns details about an unspent transaction output (UTXO)
@@ -406,10 +437,11 @@ class Bitcoin{
      * 
      * http://bitcoin.stackexchange.com/questions/19651/understanding-vout
      */
-    public function gettxout($transaction, $num, $mempool = true){
+    public function gettxout($transaction, $num, $mempool = true)
+    {
         return $this->bitcoin->gettxout($transaction, $num, $mempool);
     }
-    
+
     /**
      * function gettxoutsetinfo
      * Returns statistics about the unspent transaction output (UTXO) set.
@@ -417,10 +449,11 @@ class Bitcoin{
      * Seems to cause a 3-4 second hangup when run.
      * TODO: testing needed to find reason for hangup.
      */
-    public function gettxoutsetinfo(){
+    public function gettxoutsetinfo()
+    {
         return $this->bitcoin->gettxoutsetinfo();
     }
-    
+
     /**
      * function getwork
      * If [data] is not specified, returns formatted hash data to work on:
@@ -435,10 +468,11 @@ class Bitcoin{
      * 
      * https://en.bitcoin.it/wiki/Getwork
      */
-    public function getwork($data = null){
+    public function getwork($data = null)
+    {
         return isset($data) ? $this->bitcoin->getwork($data) : $this->bitcoin->getwork();
     }
-    
+
     /**
      * function help
      * List commands, or get help for a command.
@@ -446,10 +480,11 @@ class Bitcoin{
      * Valid Params:
      *  $help = (String) valid bitcoind command.
      */
-    public function help($cmd){
+    public function help($cmd)
+    {
         return $this->bitcoin->help($cmd);
     }
-    
+
     /**
      * function importprivkey
      * Adds a private key (as returned by dumpprivkey) to your wallet. This may 
@@ -464,18 +499,20 @@ class Bitcoin{
      * 
      * Note: rescan can take some time to complete.
      */
-    public function importprivkey($privkey, $label = null, $rescan = true){
+    public function importprivkey($privkey, $label = null, $rescan = true)
+    {
         return isset($label) ? $this->bitcoin->importprivkey($privkey, $label, $rescan) : $this->bitcoin->importprivkey($privkey);
     }
-    
+
     /**
      * function keypoolrefill
      * Fills the keypool, requires wallet passphrase to be set.
      */
-    public function keypoolrefill(){
+    public function keypoolrefill()
+    {
         return $this->bitcoin->keypoolrefill();
     }
-    
+
     /**
      * function listaccounts
      * Returns Object that has account names as keys, account balances as values.
@@ -483,18 +520,20 @@ class Bitcoin{
      * Valid Paramas:
      *  $confs = (int) number confs required to be shown.
      */
-    public function listaccounts($confs = 1){
+    public function listaccounts($confs = 1)
+    {
         return $this->bitcoin->listaccounts($confs);
     }
-    
+
     /**
      * function listaddressgroupings
      * version 0.7 Returns all addresses in the wallet and info used for coincontrol.
      */
-    public function listaddressgroupings(){
+    public function listaddressgroupings()
+    {
         return $this->bitcoin->listaddressgroupings();
     }
-    
+
     /**
      * function listreceivedbyaccount
      * Returns an array of objects containing:
@@ -507,10 +546,11 @@ class Bitcoin{
      *  $empty = (boolean) include empty in list.
      * 
      */
-    public function listreceivedbyaccount($confs = 1, $empty = false){
-        return $this->bitcoin->listreceivedbyaccount($confs, $empty);   
+    public function listreceivedbyaccount($confs = 1, $empty = false)
+    {
+        return $this->bitcoin->listreceivedbyaccount($confs, $empty);
     }
-    
+
     /**
      * function listreceivedbyaddress
      * Returns an array of objects containing:
@@ -524,10 +564,11 @@ class Bitcoin{
      *  $confs = (int) number of confirmations required.
      *  $empty = (boolean) include empty in list.
      */
-    public function listreceivedbyaddress($confs = 1, $empty = false){
+    public function listreceivedbyaddress($confs = 1, $empty = false)
+    {
         return $this->bitcoin->listreceivedbyaddress($confs, $empty);
     }
-    
+
     /**
      * function listsinceblock
      * Get all transactions in blocks since block [blockhash], or all transactions if omitted.
@@ -538,10 +579,11 @@ class Bitcoin{
      * 
      * Note: return your transactions not all.
      */
-    public function listsinceblock($blockhash = null, $confs = 1){
+    public function listsinceblock($blockhash = null, $confs = 1)
+    {
         return isset($blockhash) ? $this->bitcoin->listsinceblock($blockhash, $confs) : $this->bitcoin->listsinceblock();
     }
-    
+
     /**
      * function listtransactions
      * Returns up to [count] most recent transactions skipping the first [from] 
@@ -553,10 +595,11 @@ class Bitcoin{
      *  $count = (int) number to return.
      *  $from = (int) transaction num to start at.
      */
-    public function listtransactions($account = null, $count = 10, $from = 0){
+    public function listtransactions($account = null, $count = 10, $from = 0)
+    {
         return isset($account) ? $this->bitcoin->listtransactions($account, $count, $from) : $this->bitcoin->listtransactions();
     }
-    
+
     /**
      * function listunspent
      * version 0.7 Returns array of unspent transaction inputs in the wallet.
@@ -565,18 +608,20 @@ class Bitcoin{
      *  $minconf = (int) only show transaction with over x confs.
      *  $maxconf = (int) only show transactions with under x confs.
      */
-    public function listunspent($minconf = 1, $maxconf = 999999){
+    public function listunspent($minconf = 1, $maxconf = 999999)
+    {
         return $this->bitcoin->listunspent($minconf, $maxconf);
     }
-    
+
     /**
      * function listlockunspent
      * version 0.8 Returns list of temporarily unspendable outputs
      */
-    public function listlockunspent(){
+    public function listlockunspent()
+    {
         return $this->bitcoin->listlockunspent();
     }
-    
+
     /**
      * function lockunspent
      * version 0.8 Updates list of temporarily unspendable outputs
@@ -588,10 +633,11 @@ class Bitcoin{
      * Note: Read rpcwallet.cpp line 1725 for more info.
      * TODO: Provide more documentation.
      */
-    public function lockunspent($lock, $objects = NULL){
+    public function lockunspent($lock, $objects = NULL)
+    {
         return isset($objects) ? $this->bitcoin->lockunspent($lock, $objects) : $this->bitcoin->lockunspent($lock);
     }
-    
+
     /**
      * function move
      * Move from one account in your wallet to another
@@ -603,10 +649,11 @@ class Bitcoin{
      *  $minconf = (int) min number of confs required to move.
      *  $comments = (String) memo for yourself.
      */
-    public function move($from, $to, $amount, $minconf = 1, $comment = ''){
+    public function move($from, $to, $amount, $minconf = 1, $comment = '')
+    {
         return $this->bitcoin->move($from, $to, $amount, $minconf, $comment);
     }
-    
+
     /**
      * function sendfrom
      * <amount> is a real and is rounded to 8 decimal places. Will send the given 
@@ -622,10 +669,11 @@ class Bitcoin{
      *  $comment = (String) comment for your records.
      *  $to_comment = (String) comment for recipient.
      */
-    public function sendfrom($from, $address, $amount, $minconf = 1, $comment = '', $to_comment = ''){
+    public function sendfrom($from, $address, $amount, $minconf = 1, $comment = '', $to_comment = '')
+    {
         return $this->bitcoin->sendfrom($from, $address, $amount, $minconf, $comment, $to_comment);
     }
-    
+
     /**
      * function sendmany
      * amounts are double-precision floating point numbers
@@ -636,10 +684,11 @@ class Bitcoin{
      *  $minconf = (int) ensure number of confs before sending.
      *  $comment = (String) Comment for self.
      */
-    public function sendmany($from, $to, $minconf = 1, $comment = ''){
+    public function sendmany($from, $to, $minconf = 1, $comment = '')
+    {
         return $this->bitcoin->sendmany($from, $to, $minconf, $comment);
     }
-    
+
     /**
      * function sendrawtransaction
      * version 0.7 Submits raw transaction (serialized, hex-encoded) to local node and network.
@@ -649,10 +698,11 @@ class Bitcoin{
      * 
      * Note: more here https://en.bitcoin.it/wiki/Raw_Transactions
      */
-    public function sendrawtransaction($hex){
+    public function sendrawtransaction($hex)
+    {
         return $this->bitcoin->sendrawtransaction($hex);
     }
-    
+
     /**
      * function sendtoaddress
      * <amount> is a real and is rounded to 8 decimal places. Returns the 
@@ -664,10 +714,11 @@ class Bitcoin{
      *  $comment = (String) comment for records.
      *  $comment_to = (String) comments for recipient.
      */
-    public function sendtoaddress($address, $amount, $comment = '', $comment_to = ''){
+    public function sendtoaddress($address, $amount, $comment = '', $comment_to = '')
+    {
         return $this->bitcoin->sendtoaddress($address, $amount, $comment, $comment_to);
     }
-    
+
     /**
      * function setaccount
      * Sets the account associated with the given address. Assigning address 
@@ -678,10 +729,11 @@ class Bitcoin{
      *  $address = (String) bitcoin address.
      *  $account = (String) account to associate address with.
      */
-    public function setaccount($address, $account){
+    public function setaccount($address, $account)
+    {
         return $this->setaccount($address, $account);
     }
-    
+
     /**
      * function setgenerate
      * <generate> is true or false to turn generation on or off. Generation is 
@@ -691,10 +743,11 @@ class Bitcoin{
      *  $gen = (boolean) turn generation on or of.
      *  $limit = (int) limit process, -1 is unlimited.
      */
-    public function setgenerate($gen, $limit = -1){
+    public function setgenerate($gen, $limit = -1)
+    {
         return $this->bitcoin->setgenerate($gen, $limit);
     }
-    
+
     /**
      * function settxfee
      * <amount> is a real and is rounded to the nearest 0.00000001
@@ -702,10 +755,11 @@ class Bitcoin{
      * Valid Params:
      *  $amount = (float) amount to pay when sending transaction.
      */
-    public function settxfee($amount){
+    public function settxfee($amount)
+    {
         return $this->bitcoin->settxfee($amount);
     }
-    
+
     /**
      * function signmessage
      * Sign a message with the private key of an address.
@@ -716,10 +770,11 @@ class Bitcoin{
      * 
      * Note: for usage see http://bitcoin.stackexchange.com/questions/3337/what-are-the-safety-guidelines-for-using-the-sign-message-feature/3339#3339
      */
-    public function signmessage($address, $message){
+    public function signmessage($address, $message)
+    {
         return $this->bitcoin->signmessage($address, $message);
     }
-    
+
     /**
      * function signrawtransaction
      * version 0.7 Adds signatures to a raw transaction and returns the resulting raw transaction.
@@ -734,18 +789,20 @@ class Bitcoin{
      * 
      * TODO: improve documentations. Provide example.
      */
-    public function signrawtransaction($hex, $transactions = null, $privkey = null){
+    public function signrawtransaction($hex, $transactions = null, $privkey = null)
+    {
         return isset($transactions) ? $this->bitcoin->signrawtransaction($hex, $transactions, $privkey) : $this->bitcoin->signrawtransaction($hex);
     }
-    
+
     /**
      * function stop
      * Stop bitcoin server
      */
-    public function stop(){
+    public function stop()
+    {
         return $this->bitcoin->stop();
     }
-    
+
     /**
      * function submitblock
      * Attempts to submit new block to network.
@@ -757,10 +814,11 @@ class Bitcoin{
      * Note: See http://bitcoin.stackexchange.com/questions/8084/i-built-a-miner-got-a-hash-block-now-what-where-do-i-send-it
      * for more info on this subject. $params currently ignored.
      */
-    public function submitblock($hex, $params = null){
+    public function submitblock($hex, $params = null)
+    {
         return isset($params) ? $this->bitcoin->submitblock($hex, $params) : $this->bitcoin->submitblock($hex);
     }
-    
+
     /**
      * function validateaddress
      * Return information about <bitcoinaddress>.
@@ -768,10 +826,11 @@ class Bitcoin{
      * Valid Params:
      *  $address = (String) valid bitcoin address.
      */
-    public function validateaddress($address){
+    public function validateaddress($address)
+    {
         return $this->bitcoin->validateaddress($address);
     }
-    
+
     /**
      * function verifymessage
      * Verify a signed message.
@@ -783,20 +842,22 @@ class Bitcoin{
      * 
      * Note: See https://bitcointalk.org/index.php?topic=70911.0
      */
-    public function verifymessage($address, $sig, $message){
+    public function verifymessage($address, $sig, $message)
+    {
         return $this->bitcoin->verifymessage($address, $sig, $message);
     }
-    
+
     /**
      * function walletlock
      * Removes the wallet encryption key from memory, locking the wallet. After 
      * calling this method, you will need to call walletpassphrase again before 
      * being able to call any methods which require the wallet to be unlocked.
      */
-    public function walletlock(){
+    public function walletlock()
+    {
         return $this->bitcoin->walletlock();
     }
-    
+
     /**
      * function walletpassphrase
      * Stores the wallet decryption key in memory for <timeout> seconds.
@@ -805,10 +866,11 @@ class Bitcoin{
      *  $passphrase = (String) phrase used to lock wallet.
      *  $timeout = (int) time in seconds to hold open for.
      */
-    public function walletpassphrase($passphrase, $timeout){
+    public function walletpassphrase($passphrase, $timeout)
+    {
         return $this->bitcoin->walletpassphrase($passphrase, $timeout);
     }
-    
+
     /**
      * function walletpassphrasechange
      * Changes the wallet passphrase from <oldpassphrase> to <newpassphrase>.
@@ -817,7 +879,9 @@ class Bitcoin{
      *  $old = (String) current passphrase.
      *  $new = (String) passphrase to change to.
      */
-    public function walletpassphrasechange($old, $new){
+    public function walletpassphrasechange($old, $new)
+    {
         return $this->bitcoin->walletpassphrasechange($old, $new);
     }
+
 }

@@ -5,4 +5,8 @@ Implementation in PHP for the bicoin rpc api.
 
 1. add these files to your php project and include bitcoin.php wherever you want to use.
 
-load$ = new Bitcoin(); //To start calling function from this lib.
+$username = "user";
+$password = "pass";
+$ip = "$ip";
+
+$bitcoin = Bitcoin\BitcoinFactory::create($username, $password, $ip); // To start using lib
