@@ -1,12 +1,24 @@
 Bitcoin-PHP-API
 ===============
 
-Implementation in PHP for the bicoin rpc api.
+Implementation in PHP for the Bitcoin RPC API.
+<br />
+You must have bitcoind installed on your server in order to use you can download it here.
+http://bitcoin.org/en/download
 
-1. add these files to your php project and include bitcoin.php wherever you want to use.
+Getting Started
+---------------
++ To get started include the following code in your project.<br />
 
-$username = "user";
-$password = "pass";
-$ip = "$ip";
+<pre><code>include '../bitcoin/BitcoinFactory.php';
 
-$bitcoin = Bitcoin\BitcoinFactory::create($username, $password, $ip); // To start using lib
+$connection = Bitcoin\BitcoinFactory::create('bitcoinrpc', 'bitcoinrpcpassword');</code></pre>
+
++ Now you can start interacting with bitcoind. Test it out with the following line of code.<br />
+
+
+<pre><code>var_dump($connection->getinfo());</code></pre>
+
+Contributors
+------------
+ <a href="https://github.com/haveacigaro">haveacigaro</a>
