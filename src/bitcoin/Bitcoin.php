@@ -16,9 +16,8 @@ class Bitcoin
     //Set variables as found in bitcoin.conf
     private $bitcoin;
 
-    public function __construct(JsonRPCClient $rpc)
+    function __construct(JsonRPCClient $rpc)
     {
-        parent::__construct();
         //Create connection once to reduce calls to server.
         $this->bitcoin = $rpc;
     }
