@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fcb20fe1-8aa4-4f1a-9f33-40412bda3d9f" name="Default" comment="Allows for testing&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.travis.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/BitcoinTest.php" afterPath="$PROJECT_DIR$/tests/BitcoinTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
     </list>
     <ignored path="Bitcoin-PHP-API.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,7 +46,7 @@
       <file leaf-file-name=".travis.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="7" selection-start="35" selection-end="35" vertical-scroll-proportion="0.123203285" vertical-offset="0" max-vertical-offset="487">
+            <state line="10" column="38" selection-start="195" selection-end="195" vertical-scroll-proportion="0.30800822" vertical-offset="0" max-vertical-offset="487">
               <folding />
             </state>
           </provider>
@@ -313,7 +312,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="7" selection-start="35" selection-end="35" vertical-scroll-proportion="0.123203285" vertical-offset="0" max-vertical-offset="487">
+        <state line="10" column="38" selection-start="195" selection-end="195" vertical-scroll-proportion="0.30800822" vertical-offset="0" max-vertical-offset="487">
           <folding />
         </state>
       </provider>
