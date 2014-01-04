@@ -18,8 +18,6 @@ class Bitcoin
 
     public function __construct(JsonRPCClient $rpc)
     {
-        parent::__construct();
-        //Create connection once to reduce calls to server.
         $this->bitcoin = $rpc;
     }
 
