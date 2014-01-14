@@ -27,23 +27,4 @@
 			<directory>.</directory>
 		</testsuite>
 	</testsuites>
-	
-	<filter>
-	  <blacklist>
-		<directory suffix=".php"></directory>
-		<file></file>
-		<exclude>
-		  <directory suffix=".php"></directory>
-		  <file></file>
-		</exclude>
-	  </blacklist>
-	  <whitelist processUncoveredFilesFromWhitelist="true">
-		<directory suffix=".php"></directory>
-		<file></file>
-		<exclude>
-		  <directory suffix=".php"></directory>
-		  <file></file>
-		</exclude>
-	  </whitelist>
-	</filter>
 </phpunit>
