@@ -2,8 +2,6 @@
 
 namespace Bitcoin;
 
-include 'JsonRPCClient.php';
-
 class BitcoinFactory
 {
 	public static function create($user, $password, $ip = '127.0.0.1:8332')
@@ -12,5 +10,3 @@ class BitcoinFactory
 		return new Bitcoin($rpc);
 	}
 }
-
-include 'Bitcoin.php';
