@@ -1,0 +1,12 @@
+<phpunit bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="true">
+    <testsuites>
+        <testsuite name="Test Bitcoin API">
+            <directory>test</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
