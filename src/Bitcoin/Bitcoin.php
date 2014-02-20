@@ -22,14 +22,14 @@ class Bitcoin
         //Create connection once to reduce calls to server.
         $this->bitcoin = $rpc;
     }
-
+    
     /**
      *  function getinfo()
      * Returns an object containing various state info.
      */
     public function getinfo()
     {
-        return $this->bitcoin->getinfo();
+            return $this->bitcoin->getinfo();
     }
 
     /**
@@ -38,7 +38,7 @@ class Bitcoin
      */
     public function gethashespersec()
     {
-        return $this->bitcoin->gethashespersec();
+            return $this->bitcoin->gethashespersec();
     }
 
     /**
@@ -47,7 +47,7 @@ class Bitcoin
      */
     public function getgenerate()
     {
-        return $this->bitcoin->getgenerate();
+            return $this->bitcoin->getgenerate();
     }
 
     /**
@@ -190,7 +190,7 @@ class Bitcoin
      * Example:
      *  getaddednodeinfo(true, 'bitcoin.es');
      */
-    public function getaddednodeinfo($bool = false, $params = '')
+    public function getaddednodeinfo($bool, $params)
     {
         return $this->bitcoin->getaddednodeinfo($bool, $params);
     }
@@ -383,9 +383,9 @@ class Bitcoin
      *  $account = (String) Account name.
      *  $confs = (int) number of confimations.
      */
-    public function getreceivedbyaccount($account = null, $confs = 0)
+    public function getreceivedbyaccount($account = '' , $confs = 1)
     {
-        return isset($account) ? $this->bitcoin->getreceivedbyaccount($account, $confs) : $this->bitcoin->getreceivedbyaccount();
+        return $this->bitcoin->getreceivedbyaccount($account, $confs);
     }
 
     /**
@@ -400,7 +400,7 @@ class Bitcoin
      *  $address = (String) valid bitcoin address.
      *  $confs = (int) number of confimations.
      */
-    public function getreceivedbyaddress($address, $confs = 1)
+    public function getreceivedbyaddress($address , $confs = 1)
     {
         return $this->bitcoin->getreceivedbyaddress($address, $confs);
     }
