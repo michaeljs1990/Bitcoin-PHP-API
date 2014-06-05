@@ -10,13 +10,13 @@ http://bitcoin.org/en/download
 
 Getting Started (Branch 0.5.0)
 ---------------
-+ To get started include the following code in your project.<br />
+To get started include the following code in your project.<br />
 
 <pre><code>include 'src/bitcoin/BitcoinFactory.php';
 
 $bitcoind = \Bitcoin\BitcoinFactory::create("username", "password");</code></pre>
 
-+ Now you can start interacting with bitcoind. Test it out with the following line of code.<br />
+Now you can start interacting with bitcoind. Test it out with the following line of code.<br />
 
 
 <pre><code>var_dump($connection->getinfo());</code></pre>
